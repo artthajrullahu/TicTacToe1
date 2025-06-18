@@ -1,0 +1,11 @@
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/bin/Debug/net9.0/TicTacToe.Shared.deps.json
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/bin/Debug/net9.0/TicTacToe.Shared.dll
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/bin/Debug/net9.0/TicTacToe.Shared.pdb
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.AssemblyInfoInputs.cache
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.AssemblyInfo.cs
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.csproj.CoreCompileInputs.cache
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.dll
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/refint/TicTacToe.Shared.dll
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.pdb
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/ref/TicTacToe.Shared.dll

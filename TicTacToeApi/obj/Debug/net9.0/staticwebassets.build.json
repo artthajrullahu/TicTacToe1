@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Yujp5nX81cDBV4qDnO2IbJ5aKcCPYMCmqrpslQYhQek=",
+  "Source": "TicTacToeApi",
+  "BasePath": "_content/TicTacToeApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

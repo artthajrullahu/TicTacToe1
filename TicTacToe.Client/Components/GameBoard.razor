@@ -1,0 +1,694 @@
+@using TicTacToe.Shared.Models
+@using TicTacToe.Client.Services
+@inject IGameHubService GameHubService
+@inject IApiService ApiService
+@inject ILogger<GameBoard> Logger
+
+<div class="game-container">
+    <div class="game-header">
+        <h1>Tic Tac Toe - Distributed Systems</h1>
+        <div class="connection-status @(IsConnected ? "connected" : "disconnected")">
+            @if (IsConnected)
+            {
+                <span>🟢 Connected</span>
+            }
+            else
+            {
+                <span>🔴 Disconnected</span>
+            }
+        </div>
+    </div>
+
+    @if (CurrentGame == null)
+    {
+        <div class="lobby">
+            <h2>Game Lobby</h2>
+            <div class="lobby-actions">
+                <div class="create-game">
+                    <h3>Create New Game</h3>
+                    <div class="input-group">
+                        <input @bind="PlayerName" @bind:event="oninput" placeholder="Enter your name" />
+                        <button @onclick="CreateGame" disabled="@IsLoading">Create Game</button>
+                    </div>
+                </div>
+
+                <div class="join-game">
+                    <h3>Join Existing Game</h3>
+                    <div class="input-group">
+                        <input @bind="GameIdToJoin" @bind:event="oninput" placeholder="Enter game ID" />
+                        <input @bind="PlayerNameToJoin" @bind:event="oninput" placeholder="Enter your name" />
+                        <button @onclick="JoinGame" disabled="@IsLoading">Join Game</button>
+                    </div>
+                </div>
+
+                <div class="active-games">
+                    <h3>Active Games</h3>
+                    @if (ActiveGames.Any())
+                    {
+                        <div class="games-list">
+                            @foreach (var game in ActiveGames)
+                            {
+                                <div class="game-item">
+                                    <span>Game: @game.Id.Substring(0, 8)...</span>
+                                    <span>Players: @game.Players.Count/2</span>
+                                    <span>Status: @game.Status</span>
+                                    <button @onclick="() => JoinExistingGame(game.Id)" disabled="@(game.Players.Count >= 2)">
+                                        Join
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p>No active games found.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="game-area">
+            <div class="game-info">
+                <h2>Game: @CurrentGame.Id.Substring(0, 8)...</h2>
+                <div class="players">
+                    @foreach (var player in CurrentGame.Players)
+                    {
+                        <div class="player @(player.Symbol == CurrentGame.CurrentPlayer ? "current" : "")">
+                            <span class="player-name">@player.Name (@player.Symbol)</span>
+                            <span class="player-status @(player.IsConnected ? "online" : "offline")">
+                                @(player.IsConnected ? "🟢" : "🔴")
+                            </span>
+                        </div>
+                    }
+                </div>
+                <div class="game-status">
+                    @if (CurrentGame.Status == GameStatus.Waiting)
+                    {
+                        <p>Waiting for players...</p>
+                    }
+                    else if (CurrentGame.Status == GameStatus.Playing)
+                    {
+                        <p>Current player: @CurrentGame.CurrentPlayer</p>
+                    }
+                    else if (CurrentGame.Status == GameStatus.Finished)
+                    {
+                        @if (CurrentGame.Winner != null)
+                        {
+                            <p class="winner">Winner: @CurrentGame.Winner!</p>
+                        }
+                        else
+                        {
+                            <p class="draw">It's a draw!</p>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="board">
+                @for (int i = 0; i < 9; i++)
+                {
+                    var index = i;
+                    bool canMove = CurrentGame != null &&
+                                   CurrentPlayer != null &&
+                                   CurrentGame.Status == GameStatus.Playing &&
+                                   CurrentPlayer.Symbol == CurrentGame.CurrentPlayer &&
+                                   string.IsNullOrEmpty(CurrentGame.Board[index]);
+                    <div class="cell @(IsWinningCell(index) ? "winning" : "")"
+                         @onclick="() => MakeMove(index)"
+                         style="pointer-events:@(canMove ? "auto" : "none");opacity:@(canMove ? "1" : "0.5");">
+                        @if (!string.IsNullOrEmpty(CurrentGame.Board[index]))
+                        {
+                            <span class="symbol @CurrentGame.Board[index].ToLower()">@CurrentGame.Board[index]</span>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="game-actions">
+                @if (CurrentGame.Status == GameStatus.Finished)
+                {
+                    <button @onclick="RestartGame" class="restart-btn">Play Again</button>
+                }
+                <button @onclick="LeaveGame" class="leave-btn">Leave Game</button>
+            </div>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <div class="error-message">
+            @ErrorMessage
+            <button @onclick="ClearError">×</button>
+        </div>
+    }
+</div>
+
+<style>
+    .game-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .game-header h1 {
+        margin: 0;
+        color: #333;
+    }
+
+    .connection-status {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    .connection-status.connected {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .connection-status.disconnected {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .lobby {
+        text-align: center;
+    }
+
+    .lobby-actions {
+        display: grid;
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .input-group {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .input-group input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .input-group button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .input-group button:hover:not(:disabled) {
+        background-color: #0056b3;
+    }
+
+    .input-group button:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .games-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .game-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+    }
+
+    .game-item button {
+        padding: 5px 15px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .game-item button:hover:not(:disabled) {
+        background-color: #218838;
+    }
+
+    .game-item button:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .game-area {
+        text-align: center;
+    }
+
+    .game-info {
+        margin-bottom: 30px;
+    }
+
+    .players {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 20px 0;
+    }
+
+    .player {
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+    .player.current {
+        border-color: #007bff;
+        background-color: #f8f9ff;
+    }
+
+    .player-name {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .player-status {
+        font-size: 20px;
+    }
+
+    .game-status {
+        margin: 20px 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .winner {
+        color: #28a745;
+    }
+
+    .draw {
+        color: #ffc107;
+    }
+
+    .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        max-width: 300px;
+        margin: 0 auto 30px;
+    }
+
+    .cell {
+        aspect-ratio: 1;
+        background-color: #f8f9fa;
+        border: 2px solid #dee2e6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .cell:hover {
+        background-color: #e9ecef;
+    }
+
+    .cell.winning {
+        background-color: #d4edda;
+        border-color: #28a745;
+    }
+
+    .symbol {
+        font-size: 50px;
+    }
+
+    .symbol.x {
+        color: #dc3545;
+    }
+
+    .symbol.o {
+        color: #007bff;
+    }
+
+    .game-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .game-actions button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .restart-btn {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .restart-btn:hover {
+        background-color: #218838;
+    }
+
+    .leave-btn {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .leave-btn:hover {
+        background-color: #c82333;
+    }
+
+    .error-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #f5c6cb;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+    }
+
+    .error-message button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #721c24;
+    }
+</style>
+
+@code {
+    private GameState? CurrentGame;
+    private List<GameState> ActiveGames = new();
+    private string PlayerName = "";
+    private string GameIdToJoin = "";
+    private string PlayerNameToJoin = "";
+    private string ErrorMessage = "";
+    private bool IsLoading = false;
+    private bool IsConnected = false;
+    private PlayerInfo? CurrentPlayer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await GameHubService.ConnectAsync();
+            IsConnected = true;
+            await LoadActiveGames();
+
+            // Subscribe to SignalR events
+            GameHubService.GameStateUpdated += OnGameStateUpdated;
+            GameHubService.PlayerJoined += OnPlayerJoined;
+            GameHubService.PlayerLeft += OnPlayerLeft;
+            GameHubService.GameStarted += OnGameStarted;
+            GameHubService.GameEnded += OnGameEnded;
+            GameHubService.MoveMade += OnMoveMade;
+            GameHubService.PlayerReconnected += OnPlayerReconnected;
+            GameHubService.Error += OnError;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to initialize game service");
+            ErrorMessage = "Failed to connect to game server";
+        }
+    }
+
+    private async Task LoadActiveGames()
+    {
+        try
+        {
+            ActiveGames = await ApiService.GetActiveGamesAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to load active games");
+        }
+    }
+
+    private async Task CreateGame()
+    {
+        if (string.IsNullOrWhiteSpace(PlayerName))
+        {
+            ErrorMessage = "Please enter your name";
+            return;
+        }
+
+        IsLoading = true;
+        try
+        {
+            var request = new CreateGameRequest { PlayerName = PlayerName };
+            var game = await ApiService.CreateGameAsync(request);
+            CurrentGame = game;
+            
+            // Join the game via SignalR
+            await GameHubService.JoinGameAsync(game.Id, PlayerName);
+            
+            // Set current player
+            CurrentPlayer = game.Players.FirstOrDefault(p => p.Name == PlayerName);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to create game");
+            ErrorMessage = "Failed to create game";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task JoinGame()
+    {
+        if (string.IsNullOrWhiteSpace(GameIdToJoin) || string.IsNullOrWhiteSpace(PlayerNameToJoin))
+        {
+            ErrorMessage = "Please enter both game ID and player name";
+            return;
+        }
+
+        IsLoading = true;
+        try
+        {
+            // Join via SignalR to establish connection and add player
+            await GameHubService.JoinGameAsync(GameIdToJoin, PlayerNameToJoin);
+            
+            // CurrentGame and CurrentPlayer will be set by the OnGameStateUpdated event handler
+            // after the SignalR hub processes the join request.
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to join game: {ErrorMessage}", ex.Message);
+            ErrorMessage = $"Failed to join game: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task JoinExistingGame(string gameId)
+    {
+        if (string.IsNullOrWhiteSpace(PlayerName))
+        {
+            ErrorMessage = "Please enter your name first";
+            return;
+        }
+
+        GameIdToJoin = gameId;
+        PlayerNameToJoin = PlayerName;
+        await JoinGame();
+    }
+
+    private async Task MakeMove(int position)
+    {
+        if (CurrentGame == null || CurrentPlayer == null)
+        {
+            ErrorMessage = "Player not found.";
+            return;
+        }
+        if (CurrentGame.Status != GameStatus.Playing)
+        {
+            ErrorMessage = "Game is not active.";
+            return;
+        }
+        if (CurrentPlayer.Symbol != CurrentGame.CurrentPlayer)
+        {
+            ErrorMessage = "It's not your turn!";
+            return;
+        }
+        if (!string.IsNullOrEmpty(CurrentGame.Board[position]))
+        {
+            ErrorMessage = "Cell already taken.";
+            return;
+        }
+        try
+        {
+            await GameHubService.MakeMoveAsync(CurrentGame.Id, CurrentPlayer.Id, position);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error making move");
+            ErrorMessage = "Failed to make move: " + ex.Message;
+        }
+    }
+
+    private async Task RestartGame()
+    {
+        if (CurrentGame == null) return;
+
+        try
+        {
+            await GameHubService.RestartGameAsync(CurrentGame.Id);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to restart game");
+            ErrorMessage = "Failed to restart game";
+        }
+    }
+
+    private async Task LeaveGame()
+    {
+        try
+        {
+            if (CurrentGame != null)
+            {
+                await GameHubService.LeaveGameAsync(CurrentGame.Id);
+                CurrentGame = null;
+                CurrentPlayer = null;
+                StateHasChanged();
+                await LoadActiveGames();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error leaving game");
+            ErrorMessage = "Failed to leave game";
+        }
+    }
+
+    private bool IsWinningCell(int position)
+    {
+        if (CurrentGame?.Winner == null) return false;
+        
+        // Simple winning line detection - in a real implementation, you'd track the winning line
+        return false;
+    }
+
+    // SignalR event handlers
+    private void OnGameStateUpdated(GameState gameState)
+    {
+        if (CurrentGame?.Id != gameState.Id) return;
+        Console.WriteLine($"[GameBoard] OnGameStateUpdated: GameId={gameState.Id}, Board={string.Join(",", gameState.Board)}");
+        CurrentGame = gameState;
+        // Always update CurrentPlayer reference based on PlayerName
+        if (!string.IsNullOrEmpty(PlayerName))
+        {
+            CurrentPlayer = gameState.Players.FirstOrDefault(p => p.Name == PlayerName);
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnPlayerJoined(PlayerInfo player)
+    {
+        Console.WriteLine($"[GameBoard] OnPlayerJoined: PlayerId={player.Id}, Name={player.Name}");
+        Logger.LogInformation("Player joined: {PlayerName}", player.Name);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnPlayerLeft(string playerId)
+    {
+        Console.WriteLine($"[GameBoard] OnPlayerLeft: PlayerId={playerId}");
+        Logger.LogInformation("Player left: {PlayerId}", playerId);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnGameStarted(GameState gameState)
+    {
+        Console.WriteLine($"[GameBoard] OnGameStarted: GameId={gameState.Id}");
+        Logger.LogInformation("Game started");
+        CurrentGame = gameState;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnGameEnded(GameState gameState)
+    {
+        Console.WriteLine($"[GameBoard] OnGameEnded: GameId={gameState.Id}");
+        Logger.LogInformation("Game ended");
+        CurrentGame = gameState;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnMoveMade(GameMove move)
+    {
+        if (CurrentGame?.Id != move.GameId) return;
+        
+        Console.WriteLine($"[GameBoard] OnMoveMade: GameId={move.GameId}, Position={move.Position}, Player={move.Player}");
+        Logger.LogInformation("Move made at position {Position} by player {Player}", move.Position, move.Player);
+        // We'll wait for the GameStateUpdated event to update the UI
+    }
+
+    private void OnPlayerReconnected(PlayerInfo player)
+    {
+        Console.WriteLine($"[GameBoard] OnPlayerReconnected: PlayerId={player.Id}, Name={player.Name}");
+        Logger.LogInformation("Player reconnected: {PlayerName}", player.Name);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnError(string error)
+    {
+        Console.WriteLine($"[GameBoard] OnError: {error}");
+        ErrorMessage = error;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        GameHubService.GameStateUpdated -= OnGameStateUpdated;
+        GameHubService.PlayerJoined -= OnPlayerJoined;
+        GameHubService.PlayerLeft -= OnPlayerLeft;
+        GameHubService.GameStarted -= OnGameStarted;
+        GameHubService.GameEnded -= OnGameEnded;
+        GameHubService.MoveMade -= OnMoveMade;
+        GameHubService.PlayerReconnected -= OnPlayerReconnected;
+        GameHubService.Error -= OnError;
+    }
+
+    private void ClearError()
+    {
+        ErrorMessage = string.Empty;
+        StateHasChanged();
+    }
+}
