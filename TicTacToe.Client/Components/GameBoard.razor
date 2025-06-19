@@ -438,6 +438,8 @@
             GameHubService.MoveMade += OnMoveMade;
             GameHubService.PlayerReconnected += OnPlayerReconnected;
             GameHubService.Error += OnError;
+            GameHubService.NewGameCreated -= OnNewGameCreated; // Parandalon shumë regjistrime
+    GameHubService.NewGameCreated += OnNewGameCreated;
         }
         catch (Exception ex)
         {
@@ -445,6 +447,15 @@
             ErrorMessage = "Failed to connect to game server";
         }
     }
+    private void OnNewGameCreated(GameState newGame)
+{
+    if (!ActiveGames.Any(g => g.Id == newGame.Id))
+    {
+        ActiveGames.Add(newGame);
+        ActiveGames = ActiveGames.OrderByDescending(g => g.CreatedAt).ToList();
+        InvokeAsync(StateHasChanged);
+    }
+}
 
     private async Task LoadActiveGames()
     {
