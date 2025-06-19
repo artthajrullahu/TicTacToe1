@@ -9,3 +9,4 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/refint/TicTacToe.Shared.dll
 /Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.pdb
 /Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/ref/TicTacToe.Shared.dll
+/Users/arthajrullahu/Downloads/project/TicTacToe.Shared/obj/Debug/net9.0/TicTacToe.Shared.sourcelink.json

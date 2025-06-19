@@ -118,16 +118,16 @@
                     <div class="cell @(IsWinningCell(index) ? "winning" : "")"
                          @onclick="() => MakeMove(index)"
                          style="pointer-events:@(canMove ? "auto" : "none");opacity:@(canMove ? "1" : "0.5");">
-                        @if (!string.IsNullOrEmpty(CurrentGame.Board[index]))
+                        @if (CurrentGame != null && !string.IsNullOrEmpty(CurrentGame.Board[index]))
                         {
-                            <span class="symbol @CurrentGame.Board[index].ToLower()">@CurrentGame.Board[index]</span>
+                            <span class="symbol @(CurrentGame?.Board[index]?.ToLower())">@(CurrentGame?.Board[index])</span>
                         }
                     </div>
                 }
             </div>
 
             <div class="game-actions">
-                @if (CurrentGame.Status == GameStatus.Finished)
+                @if (CurrentGame != null && CurrentGame.Status == GameStatus.Finished)
                 {
                     <button @onclick="RestartGame" class="restart-btn">Play Again</button>
                 }
@@ -438,6 +438,8 @@
             GameHubService.MoveMade += OnMoveMade;
             GameHubService.PlayerReconnected += OnPlayerReconnected;
             GameHubService.Error += OnError;
+            GameHubService.NewGameCreated -= OnNewGameCreated; // Parandalon shumë regjistrime
+    GameHubService.NewGameCreated += OnNewGameCreated;
         }
         catch (Exception ex)
         {
@@ -445,6 +447,15 @@
             ErrorMessage = "Failed to connect to game server";
         }
     }
+    private void OnNewGameCreated(GameState newGame)
+{
+    if (!ActiveGames.Any(g => g.Id == newGame.Id))
+    {
+        ActiveGames.Add(newGame);
+        ActiveGames = ActiveGames.OrderByDescending(g => g.CreatedAt).ToList();
+        InvokeAsync(StateHasChanged);
+    }
+}
 
     private async Task LoadActiveGames()
     {

@@ -20,6 +20,7 @@ public interface IGameHubService
     event Action<GameMove>? MoveMade;
     event Action<PlayerInfo>? PlayerReconnected;
     event Action<string>? Error;
+    event Action<GameState>? NewGameCreated;
 }
 
 public class GameHubService : IGameHubService, IAsyncDisposable
@@ -36,6 +37,7 @@ public class GameHubService : IGameHubService, IAsyncDisposable
     public event Action<GameMove>? MoveMade;
     public event Action<PlayerInfo>? PlayerReconnected;
     public event Action<string>? Error;
+    public event Action<GameState>? NewGameCreated;
 
     public GameHubService(IConfiguration configuration, ILogger<GameHubService> logger)
     {
@@ -165,6 +167,12 @@ public class GameHubService : IGameHubService, IAsyncDisposable
         {
             _logger.LogError($"[SignalR] Error received: {error}");
             Error?.Invoke(error);
+        });
+
+        _hubConnection.On<GameState>("NewGameCreated", (gameState) =>
+        {
+            _logger.LogInformation($"[SignalR] NewGameCreated received: GameId={gameState.Id}");
+            NewGameCreated?.Invoke(gameState);
         });
 
         _hubConnection.Closed += async (error) =>
