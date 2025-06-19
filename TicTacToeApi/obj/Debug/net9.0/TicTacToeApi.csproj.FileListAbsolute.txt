@@ -44,3 +44,4 @@
 /Users/arthajrullahu/Downloads/project/TicTacToeApi/obj/Debug/net9.0/TicTacToeApi.pdb
 /Users/arthajrullahu/Downloads/project/TicTacToeApi/obj/Debug/net9.0/TicTacToeApi.genruntimeconfig.cache
 /Users/arthajrullahu/Downloads/project/TicTacToeApi/obj/Debug/net9.0/ref/TicTacToeApi.dll
+/Users/arthajrullahu/Downloads/project/TicTacToeApi/obj/Debug/net9.0/TicTacToeApi.sourcelink.json

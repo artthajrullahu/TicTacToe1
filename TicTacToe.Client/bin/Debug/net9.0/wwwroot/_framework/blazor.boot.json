@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "TicTacToe.Client",
   "resources": {
-    "hash": "sha256-g8BTBIPZ2rVEXmSYM4ceYtyKGPqRMwfQndI1XnmDTZ4=",
+    "hash": "sha256-CUUDX7Gz1HiwTaLg8qScMdJ+LlxxjpyruWMrbNEnrYk=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.n41ua9ceve.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.h4ild4sjod.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -210,10 +210,10 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "TicTacToe.Shared.iemcmyfrda.wasm": "TicTacToe.Shared.wasm",
-      "TicTacToe.Shared.f52tuod1gm.pdb": "TicTacToe.Shared.pdb",
-      "TicTacToe.Client.2q7ns92trm.wasm": "TicTacToe.Client.wasm",
-      "TicTacToe.Client.g9t6fr9dbu.pdb": "TicTacToe.Client.pdb"
+      "TicTacToe.Shared.msozx29bg0.wasm": "TicTacToe.Shared.wasm",
+      "TicTacToe.Shared.udbe89gcee.pdb": "TicTacToe.Shared.pdb",
+      "TicTacToe.Client.jcur0yu696.wasm": "TicTacToe.Client.wasm",
+      "TicTacToe.Client.w0t7jh89kz.pdb": "TicTacToe.Client.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.8o8n7iomrf.js": "sha256-WIUiy49hHQ3kOAtRdCtUzm3Yg5BnOqCC+Q+kri9Fi1g="
@@ -432,12 +432,12 @@
       "WindowsBase.ovqw333kan.wasm": "sha256-7LCr4nX9JSGuwzMr8Rk8TGvC6ApzQNxCDiMV/0I9JlI=",
       "mscorlib.l6md3pggqy.wasm": "sha256-jZgH0LixLeQKqaq33akQgDGhfE7vbXbHtvCId5HC0Yo=",
       "netstandard.lij9csiyuf.wasm": "sha256-DeeBl9s8G34N3IfYRQ+MoY807amodj8cvpuvUSNaWE4=",
-      "TicTacToe.Shared.iemcmyfrda.wasm": "sha256-lrUx//V09zOT39MqnaDs4oXnqbIJJTJs4yRxyXEDT5o=",
-      "TicTacToe.Client.2q7ns92trm.wasm": "sha256-JrmzBo5TLEfojPuuu46u6b9AvJfRZtUIwSVbNaFQ7gw="
+      "TicTacToe.Shared.msozx29bg0.wasm": "sha256-uj7vvTkleKPV0VEsj3/Zrmd0VSoS4ZoD3JMHgGBq+t0=",
+      "TicTacToe.Client.jcur0yu696.wasm": "sha256-nQU4qclgBTTJuTAi9yHhUIxEInDKCR79zY3lpGZObeE="
     },
     "pdb": {
-      "TicTacToe.Shared.f52tuod1gm.pdb": "sha256-I/7OL4ec71MqN/0RgwUygybpHm1KAZqmumi6fKRHEMs=",
-      "TicTacToe.Client.g9t6fr9dbu.pdb": "sha256-pGR4mbwgbDAJe0uSJ16J6ieCAwvF3Bb//X13bqSVCvA="
+      "TicTacToe.Shared.udbe89gcee.pdb": "sha256-Iv2IHrWkDtom8czy8UeVVpQOPIct7QDDef5JKZzb/J0=",
+      "TicTacToe.Client.w0t7jh89kz.pdb": "sha256-sCWKmSeW2YtmrkOwHPWH20+H8Gaa5mtfSmyuDxiV0WA="
     }
   },
   "cacheBootResources": true,
