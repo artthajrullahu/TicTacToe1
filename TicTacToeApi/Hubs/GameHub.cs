@@ -276,28 +276,28 @@ public class GameHub : Hub
     {
         try
         {
-            var games = await _mongoDBService.GetGamesByConnectionIdAsync(Context.ConnectionId);
-            foreach (var game in games)
+        var games = await _mongoDBService.GetGamesByConnectionIdAsync(Context.ConnectionId);
+        foreach (var game in games)
+        {
+            var player = game.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+            if (player != null)
             {
-                var player = game.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
-                if (player != null)
+                player.IsConnected = false;
+                // If the game is waiting for players and one disconnects, set to aborted
+                if (game.Status == GameStatus.Waiting && game.Players.Count(p => p.IsConnected) < 2)
                 {
-                    player.IsConnected = false;
-                    await _mongoDBService.UpdateGameAsync(game);
-
-                    await Groups.RemoveFromGroupAsync(Context.ConnectionId, game.Id);
-                    await Clients.Group(game.Id).SendAsync("PlayerLeft", player.Id);
-                    await Clients.Group(game.Id).SendAsync("GameStateUpdated", game);
-
-                    // If both players are disconnected, mark the game as abandoned
-                    if (game.Players.All(p => !p.IsConnected))
-                    {
-                        game.Status = GameStatus.Abandoned;
-                        await _mongoDBService.UpdateGameAsync(game);
-                        await Clients.Group(game.Id).SendAsync("GameStateUpdated", game);
-                    }
+                    game.Status = GameStatus.Aborted;
                 }
+                // If the game is playing and one disconnects, set to abandoned
+                else if (game.Status == GameStatus.Playing)
+                {
+                    game.Status = GameStatus.Abandoned;
+                }
+                await _mongoDBService.UpdateGameAsync(game);
+                await Clients.Group(game.Id).SendAsync("PlayerDisconnected", player.Id);
+                await Clients.Group(game.Id).SendAsync("GameStateUpdated", game);
             }
+        }
         }
         catch (Exception ex)
         {

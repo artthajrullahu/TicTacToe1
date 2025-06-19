@@ -1,3 +1,10 @@
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.csproj.AssemblyReference.cache
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.GeneratedMSBuildEditorConfig.editorconfig
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.AssemblyInfoInputs.cache
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.AssemblyInfo.cs
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.csproj.CoreCompileInputs.cache
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.MvcApplicationPartsAssemblyInfo.cache
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.sourcelink.json
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/blazor.boot.json
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/blazor.webassembly.js
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/dotnet.js
@@ -208,6 +215,10 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Xml.XmlSerializer.php9d66sr9.wasm
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Xml.XPath.1c8x86y34z.wasm
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Xml.XPath.XDocument.vwdo924nyz.wasm
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.sx89a4ihcc.pdb
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.4bknw4jiib.wasm
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.ec584dtwve.pdb
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.ovxtgyhmo7.wasm
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/WindowsBase.ovqw333kan.wasm
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Runtime.Serialization.Xml.fn44d6rik8.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Reflection.TypeExtensions.elsa09wwcc.wasm.gz
@@ -231,6 +242,7 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Text.RegularExpressions.gtbtxpqvsh.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Web.HttpUtility.jd5wcr9biz.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Text.Encoding.Extensions.nlydxjh19m.wasm.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.ovxtgyhmo7.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Resources.ResourceManager.9uorrdaogh.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Runtime.Extensions.849myor78y.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Globalization.ea4xp7l2s8.wasm.gz
@@ -290,6 +302,7 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.JSInterop.gkumi7kxvo.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.Extensions.Primitives.vutb1mf5cz.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.Extensions.Logging.Abstractions.7bglk34tl5.wasm.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.4bknw4jiib.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.Extensions.Configuration.h7p166i5j0.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Runtime.9idl43ts3r.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Collections.Concurrent.jadgrn67lq.wasm.gz
@@ -334,6 +347,7 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.Extensions.DependencyInjection.tlmqx4gkln.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.IO.FileSystem.DriveInfo.1o666npdpl.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Web.w3ew2t5qa6.wasm.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.sx89a4ihcc.pdb.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Net.WebClient.pe57fwwtmc.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.Extensions.FileProviders.Abstractions.tt0muuqqmn.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.AspNetCore.SignalR.Client.Core.dpp2jjfoj5.wasm.gz
@@ -348,6 +362,7 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Net.HttpListener.6kj06u2myw.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.IO.Pipes.itag36er3p.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Xml.XPath.1c8x86y34z.wasm.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.ec584dtwve.pdb.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Web.gczxzkllks.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Net.WebProxy.dy3uj3cuhy.wasm.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/System.Runtime.InteropServices.JavaScript.wts7elsoj1.wasm.gz
@@ -635,12 +650,6 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/icudt_no_CJK.dat
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/TicTacToe.Shared.dll
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/TicTacToe.Shared.pdb
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.csproj.AssemblyReference.cache
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.GeneratedMSBuildEditorConfig.editorconfig
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.AssemblyInfoInputs.cache
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.AssemblyInfo.cs
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.csproj.CoreCompileInputs.cache
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.MvcApplicationPartsAssemblyInfo.cache
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/webcil/Microsoft.AspNetCore.Authorization.wasm
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/webcil/Microsoft.AspNetCore.Components.wasm
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/webcil/Microsoft.AspNetCore.Components.Forms.wasm
@@ -896,6 +905,7 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/6t4y1l9qgl-63fj8s7r0e.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/3afh5pmlke-gycs0ec0qb.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/07i19ew99f-iag0ou56lh.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/sx3auxwc87-ulpnk8welj.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/5eu6cuk7n4-md9yvkcqlf.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/wn3gm1ynqd-sun5mhjl56.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/0tj16bkq0o-sun5mhjl56.gz
@@ -1108,6 +1118,11 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/9c0yrgfc5g-tjcz0u77k5.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/1rbygzhe0l-tptq2av103.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/d2jjmoh36n-lfu7j35m59.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/3cm7o5deo1-ovxtgyhmo7.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/n7utiocq6y-ec584dtwve.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/c2i625uwva-4bknw4jiib.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/kdzetupz62-sx89a4ihcc.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/is4a30qi79-elh8uqp4nt.gz
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/staticwebassets.build.json
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/staticwebassets.development.json
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/staticwebassets.build.endpoints.json
@@ -1122,18 +1137,4 @@
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/refint/TicTacToe.Client.dll
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.pdb
 /Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/ref/TicTacToe.Client.dll
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/sx3auxwc87-ulpnk8welj.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/TicTacToe.Client.sourcelink.json
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.udbe89gcee.pdb
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.msozx29bg0.wasm
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.msozx29bg0.wasm.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Shared.udbe89gcee.pdb.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/3cm7o5deo1-msozx29bg0.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/n7utiocq6y-udbe89gcee.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.w0t7jh89kz.pdb
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.jcur0yu696.wasm
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.jcur0yu696.wasm.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/bin/Debug/net9.0/wwwroot/_framework/TicTacToe.Client.w0t7jh89kz.pdb.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/c2i625uwva-jcur0yu696.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/kdzetupz62-w0t7jh89kz.gz
-/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/is4a30qi79-ovh8jr9tgr.gz
+/Users/arthajrullahu/Downloads/project/TicTacToe.Client/obj/Debug/net9.0/compressed/qnsphven1f-8neoa8788m.gz

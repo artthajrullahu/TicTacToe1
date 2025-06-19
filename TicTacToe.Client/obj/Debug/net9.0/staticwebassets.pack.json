@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/appsettings.json"
     },
     {
+      "Id": "/Users/arthajrullahu/Downloads/project/TicTacToe.Client/wwwroot/css/GameBoard.css",
+      "PackagePath": "staticwebassets/css/GameBoard.css"
+    },
+    {
       "Id": "/Users/arthajrullahu/Downloads/project/TicTacToe.Client/wwwroot/css/app.css",
       "PackagePath": "staticwebassets/css/app.css"
     },

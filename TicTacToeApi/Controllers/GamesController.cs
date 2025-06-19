@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TicTacToe.Shared.Models;
+using Microsoft.AspNetCore.SignalR;
+using TicTacToeApi.Hubs;
 using TicTacToeApi.Services;
 
 namespace TicTacToeApi.Controllers;
@@ -10,11 +12,13 @@ public class GamesController : ControllerBase
 {
     private readonly IMongoDBService _mongoDBService;
     private readonly ILogger<GamesController> _logger;
+    private readonly IHubContext<GameHub> _hubContext;
 
-    public GamesController(IMongoDBService mongoDBService, ILogger<GamesController> logger)
+    public GamesController(IMongoDBService mongoDBService, ILogger<GamesController> logger, IHubContext<GameHub> hubContext)
     {
         _mongoDBService = mongoDBService;
         _logger = logger;
+        _hubContext = hubContext;
     }
 
     [HttpPost]
@@ -35,6 +39,7 @@ public class GamesController : ControllerBase
             await _mongoDBService.CreateGameAsync(game);
             
             _logger.LogInformation($"Game created: {game.Id}");
+            await _hubContext.Clients.All.SendAsync("NewGameCreated", game);
             return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
         catch (Exception ex)
@@ -173,4 +178,4 @@ public class GamesController : ControllerBase
             return StatusCode(500, "Failed to get game sessions");
         }
     }
-} 
+}

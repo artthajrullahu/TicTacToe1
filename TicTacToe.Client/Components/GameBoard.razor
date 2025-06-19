@@ -3,6 +3,7 @@
 @inject IGameHubService GameHubService
 @inject IApiService ApiService
 @inject ILogger<GameBoard> Logger
+<link href="css/GameBoard.css" rel="stylesheet" />
 
 <div class="game-container">
     <div class="game-header">
@@ -145,271 +146,6 @@
     }
 </div>
 
-<style>
-    .game-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .game-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #e0e0e0;
-    }
-
-    .game-header h1 {
-        margin: 0;
-        color: #333;
-    }
-
-    .connection-status {
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: bold;
-    }
-
-    .connection-status.connected {
-        background-color: #d4edda;
-        color: #155724;
-    }
-
-    .connection-status.disconnected {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-
-    .lobby {
-        text-align: center;
-    }
-
-    .lobby-actions {
-        display: grid;
-        gap: 30px;
-        margin-top: 30px;
-    }
-
-    .input-group {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 15px;
-    }
-
-    .input-group input {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-
-    .input-group button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .input-group button:hover:not(:disabled) {
-        background-color: #0056b3;
-    }
-
-    .input-group button:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-    }
-
-    .games-list {
-        display: grid;
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .game-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        border: 1px solid #dee2e6;
-    }
-
-    .game-item button {
-        padding: 5px 15px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-    .game-item button:hover:not(:disabled) {
-        background-color: #218838;
-    }
-
-    .game-item button:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-    }
-
-    .game-area {
-        text-align: center;
-    }
-
-    .game-info {
-        margin-bottom: 30px;
-    }
-
-    .players {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin: 20px 0;
-    }
-
-    .player {
-        padding: 15px;
-        border-radius: 10px;
-        border: 2px solid #e0e0e0;
-        transition: all 0.3s ease;
-    }
-
-    .player.current {
-        border-color: #007bff;
-        background-color: #f8f9ff;
-    }
-
-    .player-name {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .player-status {
-        font-size: 20px;
-    }
-
-    .game-status {
-        margin: 20px 0;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .winner {
-        color: #28a745;
-    }
-
-    .draw {
-        color: #ffc107;
-    }
-
-    .board {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
-        max-width: 300px;
-        margin: 0 auto 30px;
-    }
-
-    .cell {
-        aspect-ratio: 1;
-        background-color: #f8f9fa;
-        border: 2px solid #dee2e6;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .cell:hover {
-        background-color: #e9ecef;
-    }
-
-    .cell.winning {
-        background-color: #d4edda;
-        border-color: #28a745;
-    }
-
-    .symbol {
-        font-size: 50px;
-    }
-
-    .symbol.x {
-        color: #dc3545;
-    }
-
-    .symbol.o {
-        color: #007bff;
-    }
-
-    .game-actions {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-    }
-
-    .game-actions button {
-        padding: 12px 24px;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .restart-btn {
-        background-color: #28a745;
-        color: white;
-    }
-
-    .restart-btn:hover {
-        background-color: #218838;
-    }
-
-    .leave-btn {
-        background-color: #dc3545;
-        color: white;
-    }
-
-    .leave-btn:hover {
-        background-color: #c82333;
-    }
-
-    .error-message {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #f8d7da;
-        color: #721c24;
-        padding: 15px;
-        border-radius: 5px;
-        border: 1px solid #f5c6cb;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        z-index: 1000;
-    }
-
-    .error-message button {
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: #721c24;
-    }
-</style>
-
 @code {
     private GameState? CurrentGame;
     private List<GameState> ActiveGames = new();
@@ -438,8 +174,7 @@
             GameHubService.MoveMade += OnMoveMade;
             GameHubService.PlayerReconnected += OnPlayerReconnected;
             GameHubService.Error += OnError;
-            GameHubService.NewGameCreated -= OnNewGameCreated; // Parandalon shumë regjistrime
-    GameHubService.NewGameCreated += OnNewGameCreated;
+            GameHubService.NewGameCreated += OnNewGameCreated;
         }
         catch (Exception ex)
         {
@@ -447,15 +182,16 @@
             ErrorMessage = "Failed to connect to game server";
         }
     }
+
     private void OnNewGameCreated(GameState newGame)
-{
-    if (!ActiveGames.Any(g => g.Id == newGame.Id))
     {
-        ActiveGames.Add(newGame);
-        ActiveGames = ActiveGames.OrderByDescending(g => g.CreatedAt).ToList();
-        InvokeAsync(StateHasChanged);
+        if (!ActiveGames.Any(g => g.Id == newGame.Id))
+        {
+            ActiveGames.Add(newGame);
+            ActiveGames = ActiveGames.OrderByDescending(g => g.CreatedAt).ToList();
+            InvokeAsync(StateHasChanged);
+        }
     }
-}
 
     private async Task LoadActiveGames()
     {
@@ -692,6 +428,7 @@
         GameHubService.PlayerLeft -= OnPlayerLeft;
         GameHubService.GameStarted -= OnGameStarted;
         GameHubService.GameEnded -= OnGameEnded;
+        GameHubService.NewGameCreated -= OnNewGameCreated;
         GameHubService.MoveMade -= OnMoveMade;
         GameHubService.PlayerReconnected -= OnPlayerReconnected;
         GameHubService.Error -= OnError;

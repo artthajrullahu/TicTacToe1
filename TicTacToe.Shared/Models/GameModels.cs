@@ -13,7 +13,8 @@ public enum GameStatus
     Waiting,
     Playing,
     Finished,
-    Abandoned
+    Abandoned,
+    Aborted
 }
 
 public class GameState
@@ -85,4 +86,4 @@ public class GameSession
     public string PlayerName { get; set; } = string.Empty;
     public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
     public bool IsActive { get; set; } = true;
-} 
+}

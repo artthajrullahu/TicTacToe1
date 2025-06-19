@@ -154,7 +154,8 @@ public class MongoDBService : IMongoDBService
     {
         try
         {
-            var filter = Builders<GameState>.Filter.Ne(g => g.Status, GameStatus.Finished);
+            var filter = Builders<GameState>.Filter.Ne(g => g.Status, GameStatus.Finished) &
+                         Builders<GameState>.Filter.Ne(g => g.Status, GameStatus.Aborted);
             return await _gamesCollection.Find(filter).ToListAsync();
         }
         catch (Exception ex)
@@ -212,4 +213,4 @@ public class MongoDBService : IMongoDBService
         var filter = Builders<GameState>.Filter.ElemMatch(g => g.Players, p => p.ConnectionId == connectionId);
         return await _gamesCollection.Find(filter).ToListAsync();
     }
-} 
+}
